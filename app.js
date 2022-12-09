@@ -1,8 +1,19 @@
 const express = require("express");
-const mongoose = require("mongoose");
-
 const app = express();
 
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/Belgrade-with-children", 
+{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false})
+    .then(() => {
+        console.log("MongoDB connected!");
+    })
+    .catch(err => {
+        console.log("MongoDB connection error:");
+        console.log(err);
+    })
+
+
+//[Routings]
 app.get("/", (req, res) => {
     res.send("home");
     // res.render("home")
