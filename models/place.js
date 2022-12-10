@@ -4,9 +4,10 @@ const placeSchema = new mongoose.Schema({
     title: String,
     categories: [String],
     ages: [String],
-    price: Number,
+    price: String,
     description: String,
     location: String,
+    image: String,
 })
 
 module.exports = mongoose.model("Place", placeSchema);

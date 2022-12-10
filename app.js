@@ -18,6 +18,8 @@ app.set("views", path.join(__dirname, "views"));
 const ejsMate = require('ejs-mate');
 app.engine("ejs", ejsMate); 
 
+const Place = require("./models/place");
+
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, "public")));
@@ -31,21 +33,31 @@ app.get("/", (req, res) => {
 });
 
 //Index Place
-app.get("/places", (req, res) => {
-    res.render("places/index.ejs");
+app.get("/places", async(req, res) => {
+    const places = await Place.find({});
+    res.render("places/index.ejs", { places });
 });
 
-// //Show a certain Place
-// app.get("/places/:id", (req, res) => {
-//     const { id } = req.params;　//クエリストリング部(req.params)に変数を与える
-//     const comment = comments.find(c => c.id === id); //idが一致するコメントを探す
-//     res.render("show.ejs") //show.ejsをレンダーするけど、実際のURLはcomments/:idになるのに注意
-// });
+//New Place
+app.get("/places/new", (req, res) => {
+    res.render("places/new.ejs");
+});
+// Create Place
+app.post("/places", async(req, res) => {
+    console.log(req.body.place)
+    const place = new Place(req.body.place);
+    await place.save();
+    res.redirect("/places");
+});
 
-// //New Place
-// app.get("/comments/new", (req, res) => {
-//     res.render("comments/new.ejs"); //コメント入力フォームを作成
-// });
+//Show a certain Place
+app.get("/places/:id", async(req, res) => {
+    const { id } = req.params;
+    const place = await Place.findById(id);
+    res.render("places/show.ejs", { place });
+});
+
+
 
 // //Edit a certain Place
 // app.get("/comments/:id/edit", (req, res) => {
@@ -76,8 +88,6 @@ app.get("/places", (req, res) => {
 
 // //Delete(review)
 // router.delete("/:reviewId", isLoggedIn, isReviewAuther, catchAsync(reviews.deleteReview));
-
-
 
 app.listen(3000, () => {
     console.log("Waiting request at port 3000...")

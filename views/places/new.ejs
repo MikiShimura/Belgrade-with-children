@@ -1,0 +1,111 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="row">
+    <h1 class="text-center">New place</h1>
+    <div class="offset-md-3 col-md-6">
+        <form action="/places" method="post" novalidate class="variated-form" enctype="application/x-www-form-urlencoded">
+            <div class="mb-3">   
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" id="title" type="title" placeholder="Title" name="place[title]" required>
+                <div class="invalid-feedback">
+                    Plese fill out the field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" id="description" type="description" placeholder="Description" name="place[description]" required></textarea>
+                <div class="invalid-feedback">
+                    Plese fill out the field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="for-label">Categories</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="category1" value="Culture">
+                    <label class="form-check-label" for="category1">Culture</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="category2" value="Sport">
+                    <label class="form-check-label" for="category2">Sport</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="category3" value="Nature">
+                    <label class="form-check-label" for="category3">Nature</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="category4" value="Education">
+                    <label class="form-check-label" for="category4">Education</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="for-label">Ages</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="Ages1" value="0~2">
+                    <label class="form-check-label" for="Ages1">0~2 years old</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="Ages2" value="3~6">
+                    <label class="form-check-label" for="Ages2">3~6 years old</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="Ages3" value="7~10">
+                    <label class="form-check-label" for="Ages3">7~10 years old</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="Ages4" value="10~">
+                    <label class="form-check-label" for="Ages4">10~ years old</label>
+                </div>
+            </div>
+            <!--
+            <div class="mb-3">
+                <label for="categories" class="form-label">Categories</label>
+                <select class="form-select" id="categories" required>
+                  <option selected value="Culture">Culture</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Nature">Nature</option>
+                  <option value="Education">Education</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid category.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="ages" class="form-label">Ages</label>
+                <select class="form-select" id="ages" required>
+                  <option selected value="0~2">0~2 years old</option>
+                  <option value="3~6">3~6 years old</option>
+                  <option value="7~10">7~10 years old</option>
+                  <option value="10~">10~ years old</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid age.
+                </div>
+            </div>
+            -->
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" id="location" type="location" placeholder="Location" name="place[location]" required>
+                <div class="invalid-feedback">
+                    Please fill out the field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="price">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">€</span>
+                    <input type="text" class="form-control" id="price" placeholder="0" aria-label="price" aria-describedby="price-label" name="place[price]" required>
+                    <div class="invalid-feedback">
+                        Please fill out the field.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <button class="btn btn-success">Done</button>
+            </div>
+        </form>
+
+        <a href="/places">Back to Overview</a>
+    </div>
+</div>
+    

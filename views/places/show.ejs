@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate') -%>
+<div class="col-6">
+    <div class="card mb-3">
+        <div class="card-body">
+            <img src="<%= place.image %>" class="d-block w-100" alt="...">
+            <h5 class="card-title"><%= place.title %></h5>
+            <p class="card-text"><%= place.description %></p>
+        </div>
+        <ul class="list-group list-group-flush"> 
+            <li class="list-group-item">
+                <% for (let category of place.categories) { %>
+                    <%= category %>
+                <% } %> 
+            </li>
+            <li class="list-group-item">
+                <% for (let age of place.ages) { %>
+                    <%= age %>
+                <% } %> 
+            </li>
+            <li class="list-group-item text-muted"><%= place.location %></li>
+            <li class="list-group-item text-muted">€<%= place.price %></li>
+        </ul>
+    
+        <!--  <div class="card-body">
+            <a href="/campgrounds/<%= place._id %>/edit" class="card-link btn btn-info">Edit</a>
+            <form class="d-inline" action="/campgrounds/<%= place._id %>?_method=DELETE" method="post">  
+              <button class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        -->
+    </div>
+</div>
