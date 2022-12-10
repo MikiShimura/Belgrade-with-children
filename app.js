@@ -12,13 +12,23 @@ mongoose.connect("mongodb://localhost:27017/Belgrade-with-children",
         console.log(err);
     })
 
+const path = require("path");
+app.set("views", path.join(__dirname, "views"));
+
+const ejsMate = require('ejs-mate');
+app.engine("ejs", ejsMate); 
+
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json()); 
+app.use(express.static(path.join(__dirname, "public")));
+
 
 //[Routings]
+//Home
 app.get("/", (req, res) => {
     res.send("home");
     // res.render("home")
 });
-
 
 //Index Place
 app.get("/places", (req, res) => {
@@ -32,30 +42,9 @@ app.get("/places", (req, res) => {
 //     res.render("show.ejs") //show.ejsをレンダーするけど、実際のURLはcomments/:idになるのに注意
 // });
 
-
-
-// //Post(review)
-// router.post("/", isLoggedIn, validateReview, catchAsync(reviews.createReview));
-
-// //Delete(review)
-// router.delete("/:reviewId", isLoggedIn, isReviewAuther, catchAsync(reviews.deleteReview));
-
-
 // //New Place
 // app.get("/comments/new", (req, res) => {
 //     res.render("comments/new.ejs"); //コメント入力フォームを作成
-// });
-
-// //Create Place
-// app.post("/comments", (req, res) => {
-//     const {username, comment} = req.body; //入力されたデータ(req.body)に変数を与える
-//     comments.push({id : uuid(), username, comment}); //IDと以上とをコメントリストに追加、ここの書き方は以下を省略したもの
-//         // {
-//         //     id : uuid(),
-//         //     username: username,
-//         //     comment: comment
-//         // }
-//     res.redirect("/comments") //コメント一覧にジャンプ
 // });
 
 // //Edit a certain Place
@@ -80,6 +69,14 @@ app.get("/places", (req, res) => {
 //     comments = comments.filter(c => c.id !== id); //commentsの配列からidの一致しないものを取り除いて、それをcommentsに再代入
 //     res.redirect("/comments");
 // });
+
+
+// //Post(review)
+// router.post("/", isLoggedIn, validateReview, catchAsync(reviews.createReview));
+
+// //Delete(review)
+// router.delete("/:reviewId", isLoggedIn, isReviewAuther, catchAsync(reviews.deleteReview));
+
 
 
 app.listen(3000, () => {
