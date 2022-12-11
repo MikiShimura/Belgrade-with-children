@@ -44,7 +44,6 @@ app.get("/places/new", (req, res) => {
 });
 // Create Place
 app.post("/places", async(req, res) => {
-    console.log(req.body.place)
     const place = new Place(req.body.place);
     await place.save();
     res.redirect("/places");
