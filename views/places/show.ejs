@@ -7,19 +7,25 @@
             <p class="card-text"><%= place.description %></p>
         </div>
         <ul class="list-group list-group-flush"> 
-            <li class="list-group-item">
+            <li class="list-group-item">Category 
                 <% for (let category of place.categories) { %>
                     <%= category %>
                 <% } %> 
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item">Ages 
                 <% for (let age of place.ages) { %>
                     <%= age %>
                 <% } %> 
             </li>
             <li class="list-group-item text-muted"><%= place.location %></li>
-            <li class="list-group-item text-muted">€<%= place.price %></li>
+            <li class="list-group-item text-muted"><%= place.price %>RSD</li>
         </ul>
+        <div class="card-body">
+            <a href="/places/<%= place._id %>/edit" class="card-link btn btn-info">Edit</a>
+            <form class="d-inline" action="/places/<%= place._id %>?_method=DELETE"  method="post">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </div>
     
         <!--  <div class="card-body">
             <a href="/campgrounds/<%= place._id %>/edit" class="card-link btn btn-info">Edit</a>

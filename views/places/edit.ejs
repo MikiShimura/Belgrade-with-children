@@ -3,17 +3,17 @@
 <div class="row">
     <h1 class="text-center">New place</h1>
     <div class="offset-md-3 col-md-6">
-        <form action="/places" method="post" novalidate class="variated-form" enctype="application/x-www-form-urlencoded">
+        <form action="/places/<%= place._id %>?_method=PUT" method="post" novalidate class="variated-form" enctype="application/x-www-form-urlencoded">
             <div class="mb-3">   
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" id="title" type="title" placeholder="Title" name="place[title]" required>
+                <input class="form-control" id="title" type="title" placeholder="Title" name="place[title]" value="<%= place.title %>" required>
                 <div class="invalid-feedback">
                     Plese fill out the field.
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" id="description" type="description" placeholder="Description" name="place[description]" required></textarea>
+                <textarea class="form-control" id="description" type="description" placeholder="Description" name="place[description]" value="<%= place.description %>" required></textarea>
                 <div class="invalid-feedback">
                     Plese fill out the field.
                 </div>
@@ -21,44 +21,60 @@
             <div class="mb-3">
                 <p class="for-label">Categories</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category1" value="Culture" name="place[categories]">
+                    <input class="form-check-input" type="checkbox" id="category1" value="Culture" name="place[categories]" 
+                        <% if( place.categories.includes("Culture") ) { %>checked<% } %> 
+                    >
                     <label class="form-check-label" for="category1">Culture</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category2" value="Sport"  name="place[categories]">
+                    <input class="form-check-input" type="checkbox" id="category2" value="Sport"  name="place[categories]" 
+                        <% if( place.categories.includes("Sport") ) { %>checked<% } %>
+                    >
                     <label class="form-check-label" for="category2">Sport</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category3" value="Nature"  name="place[categories]">
+                    <input class="form-check-input" type="checkbox" id="category3" value="Nature"  name="place[categories]" 
+                    <% if( place.categories.includes("Nature") ) { %>checked<% } %>
+                    >
                     <label class="form-check-label" for="category3">Nature</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category4" value="Education"  name="place[categories]">
+                    <input class="form-check-input" type="checkbox" id="category4" value="Education"  name="place[categories]" 
+                    <% if( place.categories.includes("Education") ) { %>checked<% } %>
+                    >
                     <label class="form-check-label" for="category4">Education</label>
                 </div>
             </div>
             <div class="mb-3">
                 <p class="for-label">Ages</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages1" value="0~2" name="place[ages]">
+                    <input class="form-check-input" type="checkbox" id="Ages1" value="0~2" name="place[ages]" 
+                        <% if( place.ages.includes("0~2") ) { %>checked<% } %> 
+                    >
                     <label class="form-check-label" for="Ages1">0~2 years old</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages2" value="3~6" name="place[ages]">
+                    <input class="form-check-input" type="checkbox" id="Ages2" value="3~6" name="place[ages]" 
+                        <% if( place.ages.includes("3~6") ) { %>checked<% } %>
+                    >
                     <label class="form-check-label" for="Ages2">3~6 years old</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages3" value="7~10" name="place[ages]">
+                    <input class="form-check-input" type="checkbox" id="Ages3" value="7~10" name="place[ages]" 
+                        <% if( place.ages.includes("7~10") ) { %>checked<% } %>
+                    >
                     <label class="form-check-label" for="Ages3">7~10 years old</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages4" value="10~" name="place[ages]">
+                    <input class="form-check-input" type="checkbox" id="Ages4" value="10~" name="place[ages]" 
+                        <% if( place.ages.includes("10~") ) { %>checked<% } %>
+                    >
                     <label class="form-check-label" for="Ages4">10~ years old</label>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
-                <input class="form-control" id="location" type="location" placeholder="Location" name="place[location]" required>
+                <input class="form-control" id="location" type="location" placeholder="Location" name="place[location]" value="<%= place.location %>" required>
                 <div class="invalid-feedback">
                     Please fill out the field.
                 </div>
@@ -66,7 +82,7 @@
             <div class="mb-3">
                 <label class="form-label" for="price">Price</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="price" placeholder="0" aria-label="price" aria-describedby="price-label" name="place[price]" required>
+                    <input type="text" class="form-control" id="price" placeholder="0" aria-label="price" aria-describedby="price-label" name="place[price]" value="<%= place.price %>" required>
                     <span class="input-group-text" id="price-label">RSD</span>
                     <div class="invalid-feedback">
                         Please fill out the field.
@@ -75,7 +91,7 @@
             </div>
             
             <div class="mb-3">
-                <button class="btn btn-success">Done</button>
+                <button class="btn btn-success">Edit</button>
             </div>
         </form>
 

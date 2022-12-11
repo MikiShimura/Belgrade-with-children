@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const methodOverride = require('method-override');
+
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/Belgrade-with-children", 
 {useNewUrlParser: true, useUnifiedTopology: true})
@@ -20,9 +22,11 @@ app.engine("ejs", ejsMate);
 
 const Place = require("./models/place");
 
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, "public")));
+
 
 
 //[Routings]
@@ -57,29 +61,26 @@ app.get("/places/:id", async(req, res) => {
 });
 
 
+//Edit a certain Place
+app.get("/places/:id/edit", async(req, res) => {
+    const { id } = req.params;
+    const place = await Place.findById(id);
+    res.render("places/edit.ejs", { place });
+});
+//Update a certain Place
+app.put("/places/:id", async(req, res) => {
+    const { id } = req.params;
+    const editedPlace = await Place.findByIdAndUpdate(id, {...req.body.place})
+    await editedPlace.save();
+    res.redirect(`/places/${editedPlace._id}`);
+});
 
-// //Edit a certain Place
-// app.get("/comments/:id/edit", (req, res) => {
-//     const { id } = req.params;
-//     const comment = comments.find(c => c.id === id);
-//     res.render("comments/edit.ejs",{comment});
-// });
-
-// //Update a certain Place
-// app.patch("/comments/:id", (req, res) => { //patchはデータを一部変更するときに使う、更新する内容しかreq.bodyに送らない
-//     const { id } = req.params; 
-//     const newCommentText = req.body.comment; //入力されたデータ(req.body)のコメント部を変数に入れる
-//     const foundComment = comments.find(c => c.id === id); //idが一致するコメントを探す
-//     foundComment.comment = newCommentText; //idが一致したコメントのコメント部を、入力されたデータで置き換える
-//     res.redirect("/comments");
-// });
-
-// //Delete a certain Place
-// app.delete("/comments/:id", (req, res) => {
-//     const { id } = req.params;
-//     comments = comments.filter(c => c.id !== id); //commentsの配列からidの一致しないものを取り除いて、それをcommentsに再代入
-//     res.redirect("/comments");
-// });
+//Delete a certain Place
+app.delete("/places/:id", async(req, res) => {
+    const { id } = req.params;
+    await Place.findByIdAndDelete(id);
+    res.redirect("/places");
+});
 
 
 // //Post(review)
