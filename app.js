@@ -27,6 +27,7 @@ const Place = require("./models/place");
 //Errors
 const ExpressError = require("./utils/ExpressError");
 const catchAsync = require("./utils/catchAsync");
+const { validatePlace } = require("./middleware");
 
 //
 app.use(methodOverride("_method"));
@@ -53,7 +54,7 @@ app.get("/places/new", (req, res) => {
     res.render("places/new.ejs");
 });
 // Create Place
-app.post("/places", catchAsync(async(req, res) => {
+app.post("/places", validatePlace, catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
     res.redirect("/places");
@@ -74,7 +75,7 @@ app.get("/places/:id/edit", catchAsync(async(req, res) => {
     res.render("places/edit.ejs", { place });
 }));
 //Update a certain Place
-app.put("/places/:id", catchAsync(async(req, res) => {
+app.put("/places/:id", validatePlace, catchAsync(async(req, res) => {
     const { id } = req.params;
     const editedPlace = await Place.findByIdAndUpdate(id, {...req.body.place})
     await editedPlace.save();
