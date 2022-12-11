@@ -19,14 +19,20 @@ app.set("views", path.join(__dirname, "views"));
 
 const ejsMate = require('ejs-mate');
 app.engine("ejs", ejsMate); 
+app.set("view engine", "ejs");
 
+//Models
 const Place = require("./models/place");
 
+//Errors
+const ExpressError = require("./utils/ExpressError");
+const catchAsync = require("./utils/catchAsync");
+
+//
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, "public")));
-
 
 
 //[Routings]
@@ -37,50 +43,50 @@ app.get("/", (req, res) => {
 });
 
 //Index Place
-app.get("/places", async(req, res) => {
+app.get("/places", catchAsync(async(req, res) => {
     const places = await Place.find({});
     res.render("places/index.ejs", { places });
-});
+}));
 
 //New Place
 app.get("/places/new", (req, res) => {
     res.render("places/new.ejs");
 });
 // Create Place
-app.post("/places", async(req, res) => {
+app.post("/places", catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
     res.redirect("/places");
-});
+}));
 
 //Show a certain Place
-app.get("/places/:id", async(req, res) => {
+app.get("/places/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
     res.render("places/show.ejs", { place });
-});
+}));
 
 
 //Edit a certain Place
-app.get("/places/:id/edit", async(req, res) => {
+app.get("/places/:id/edit", catchAsync(async(req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
     res.render("places/edit.ejs", { place });
-});
+}));
 //Update a certain Place
-app.put("/places/:id", async(req, res) => {
+app.put("/places/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
     const editedPlace = await Place.findByIdAndUpdate(id, {...req.body.place})
     await editedPlace.save();
     res.redirect(`/places/${editedPlace._id}`);
-});
+}));
 
 //Delete a certain Place
-app.delete("/places/:id", async(req, res) => {
+app.delete("/places/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
     res.redirect("/places");
-});
+}));
 
 
 // //Post(review)
@@ -88,6 +94,18 @@ app.delete("/places/:id", async(req, res) => {
 
 // //Delete(review)
 // router.delete("/:reviewId", isLoggedIn, isReviewAuther, catchAsync(reviews.deleteReview));
+
+app.all("*", (req, res, next) =>{
+    next(new ExpressError("We can't find the page", 404));
+})
+
+app.use((err, req, res, next) => { 
+    const {statusCode = 500} = err;
+    if (!err.message){
+        err.message = "We got error";
+    }
+    res.status(statusCode).render("error", { err });
+})
 
 app.listen(3000, () => {
     console.log("Waiting request at port 3000...")
