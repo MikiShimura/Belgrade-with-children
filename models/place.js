@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const placeSchema = new mongoose.Schema({
     title: String,
-    categories: [String],
-    ages: [String],
+    categories: [],
+    ages: [],
     price: String,
     description: String,
     location: String,

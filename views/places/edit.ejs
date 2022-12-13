@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') -%>
 
 <div class="row">
-    <h1 class="text-center">New place</h1>
+    <h1 class="text-center">Edit place</h1>
     <div class="offset-md-3 col-md-6">
         <form action="/places/<%= place._id %>?_method=PUT" method="post" novalidate class="needs-validation" enctype="application/x-www-form-urlencoded">
             <div class="mb-3">   
@@ -13,7 +13,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" id="description" type="description" placeholder="Description" name="place[description]" value="<%= place.description %>" required></textarea>
+                <textarea class="form-control" id="description" type="description" placeholder="Description" name="place[description]" value="" required><%= place.description %></textarea>
                 <div class="invalid-feedback">
                     Plese fill out the field.
                 </div>
@@ -21,28 +21,28 @@
             <div class="mb-3">
                 <p class="for-label">Categories</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category1" value="Culture" name="place[categories]" 
+                    <input class="form-check-input" type="checkbox" id="Culture" value="Culture" name="place[categories]" 
                         <% if( place.categories.includes("Culture") ) { %>checked<% } %> 
                     >
-                    <label class="form-check-label" for="category1">Culture</label>
+                    <label class="form-check-label" for="Culture">Culture</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category2" value="Sport"  name="place[categories]" 
+                    <input class="form-check-input" type="checkbox" id="Sport" value="Sport"  name="place[categories]" 
                         <% if( place.categories.includes("Sport") ) { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="category2">Sport</label>
+                    <label class="form-check-label" for="Sport">Sport</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category3" value="Nature"  name="place[categories]" 
+                    <input class="form-check-input" type="checkbox" id="Nature" value="Nature"  name="place[categories]" 
                     <% if( place.categories.includes("Nature") ) { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="category3">Nature</label>
+                    <label class="form-check-label" for="Nature">Nature</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="category4" value="Education"  name="place[categories]" 
+                    <input class="form-check-input" type="checkbox" id="Education" value="Education"  name="place[categories]" 
                     <% if( place.categories.includes("Education") ) { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="category4">Education</label>
+                    <label class="form-check-label" for="Education">Education</label>
                 </div>
             </div>
             <div class="mb-3">
