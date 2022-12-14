@@ -23,6 +23,7 @@ app.set("view engine", "ejs");
 
 //Models
 const Place = require("./models/place");
+const Review = require("./models/review");
 
 //Errors
 const ExpressError = require("./utils/ExpressError");
@@ -57,14 +58,14 @@ app.get("/places/new", (req, res) => {
 app.post("/places", validatePlace, catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
-    console.log(req.body.place)
     res.redirect("/places");
 }));
 
 //Show a certain Place
 app.get("/places/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
-    const place = await Place.findById(id);
+    const place = await Place.findById(id)
+    .populate("reviews");
     res.render("places/show.ejs", { place });
 }));
 
@@ -90,9 +91,17 @@ app.delete("/places/:id", catchAsync(async(req, res) => {
     res.redirect("/places");
 }));
 
-
-// //Post(review)
-// router.post("/", isLoggedIn, validateReview, catchAsync(reviews.createReview));
+//Post review
+app.post("/places/:id/reviews", catchAsync(async(req, res) => {
+    const { id } = req.params;
+    const place = await Place.findByIdAndDelete(id);
+    const review = new Review(req.body.reviews);
+    place.reviews.push(review);
+    await review.save();
+    await place.save();
+    console.log(place)
+    res.redirect(`/places/${place._id}`)
+}));
 
 // //Delete(review)
 // router.delete("/:reviewId", isLoggedIn, isReviewAuther, catchAsync(reviews.deleteReview));
