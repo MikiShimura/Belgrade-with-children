@@ -58,6 +58,7 @@ app.get("/places/new", (req, res) => {
 app.post("/places", validatePlace, catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
+    console.log(req.body)
     res.redirect("/places");
 }));
 

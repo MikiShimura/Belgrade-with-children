@@ -19,28 +19,28 @@
                 </div>
             </div>
             <div class="mb-3">
-                <p class="for-label">Categories</p>
+                <p class="for-label">Category</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Culture" value="Culture" name="place[categories]" 
-                        <% if( place.categories.includes("Culture") ) { %>checked<% } %> 
+                    <input class="form-check-input" type="radio" name="place[category]" id="Culture" value="Culture"
+                        <% if( place.category === "Culture") { %>checked<% } %>
                     >
                     <label class="form-check-label" for="Culture">Culture</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Sport" value="Sport"  name="place[categories]" 
-                        <% if( place.categories.includes("Sport") ) { %>checked<% } %>
+                    <input class="form-check-input" type="radio" name="place[category]" id="Sport" value="Sport"
+                        <% if( place.category === "Sport") { %>checked<% } %>
                     >
                     <label class="form-check-label" for="Sport">Sport</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Nature" value="Nature"  name="place[categories]" 
-                    <% if( place.categories.includes("Nature") ) { %>checked<% } %>
+                    <input class="form-check-input" type="radio" name="place[category]" id="NatureNature" value="Nature"
+                        <% if( place.category === "Nature") { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="Nature">Nature</label>
+                    <label class="form-check-label" for="inlineRadio1">Nature</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Education" value="Education"  name="place[categories]" 
-                    <% if( place.categories.includes("Education") ) { %>checked<% } %>
+                    <input class="form-check-input" type="radio" name="place[category]" id="Education" value="Education"
+                        <% if( place.category === "Education") { %>checked<% } %>
                     >
                     <label class="form-check-label" for="Education">Education</label>
                 </div>

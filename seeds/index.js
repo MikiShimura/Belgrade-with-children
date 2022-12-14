@@ -15,7 +15,7 @@ const seedDB = async () => {
     await Place.deleteMany({});
         const place = new Place({
             title: 'Pozorište lutaka "Pinokio"',
-            categories: ["Culture"],
+            category: ["Culture"],
             ages: ["0~2", "3~6"],
             price: 500,
             description: "Fun puppet theater for small children",
