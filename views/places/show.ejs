@@ -3,7 +3,9 @@
 <div class="col-6">
     <div class="card mb-3">
         <div class="card-body">
+            <% if (place.image) { %> 
             <img src="<%= place.image %>" class="d-block w-100" alt="...">
+            <% } %> 
             <h5 class="card-title"><%= place.title %></h5>
             <p class="card-text"><%= place.description %></p>
         </div>
@@ -53,4 +55,19 @@
       </div>
       <button class="btn btn-success">Post review</button>
     </form>
+
+    <% for (let review of place.reviews) { %> 
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="starability-result" data-rating="<%= review.rating %>">
+            Rated: <%= review.rating %> stars
+          </p>
+          <p class="card-text">Comment: <%= review.body %></p>
+          <form action="/places/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% } %>
+
 </div>

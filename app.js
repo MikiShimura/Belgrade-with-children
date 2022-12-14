@@ -58,7 +58,6 @@ app.get("/places/new", (req, res) => {
 app.post("/places", validatePlace, catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
-    console.log(req.body)
     res.redirect("/places");
 }));
 
@@ -94,18 +93,21 @@ app.delete("/places/:id", catchAsync(async(req, res) => {
 
 //Post review
 app.post("/places/:id/reviews", catchAsync(async(req, res) => {
-    const { id } = req.params;
-    const place = await Place.findByIdAndDelete(id);
-    const review = new Review(req.body.reviews);
+    const place = await Place.findById(req.params.id);
+    const review = new Review(req.body.review);
     place.reviews.push(review);
     await review.save();
     await place.save();
-    console.log(place)
     res.redirect(`/places/${place._id}`)
 }));
 
-// //Delete(review)
-// router.delete("/:reviewId", isLoggedIn, isReviewAuther, catchAsync(reviews.deleteReview));
+//Delete review
+app.delete("/places/:id/reviews/:reviewId", catchAsync(async(req, res) => {
+    const { id, reviewId } = req.params
+    await Place.findByIdAndUpdate(id, { $pull:{ reviews: reviewId }})
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/places/${id}`);
+}));
 
 app.all("*", (req, res, next) =>{
     next(new ExpressError("We can't find the page", 404));
