@@ -38,76 +38,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 //[Routings]
+const placeRoutes = require("./routes/places");
+const reviewRoutes = require("./routes/reviews")
+app.use("/places", placeRoutes);
+app.use("/places/:id/reviews", reviewRoutes)
+
+
 //Home
 app.get("/", (req, res) => {
     res.send("home");
     // res.render("home")
 });
-
-//Index Place
-app.get("/places", catchAsync(async(req, res) => {
-    const places = await Place.find({});
-    res.render("places/index.ejs", { places });
-}));
-
-//New Place
-app.get("/places/new", (req, res) => {
-    res.render("places/new.ejs");
-});
-// Create Place
-app.post("/places", validatePlace, catchAsync(async(req, res) => {
-    const place = new Place(req.body.place);
-    await place.save();
-    res.redirect("/places");
-}));
-
-//Show a certain Place
-app.get("/places/:id", catchAsync(async(req, res) => {
-    const { id } = req.params;
-    const place = await Place.findById(id)
-    .populate("reviews");
-    res.render("places/show.ejs", { place });
-}));
-
-
-//Edit a certain Place
-app.get("/places/:id/edit", catchAsync(async(req, res) => {
-    const { id } = req.params;
-    const place = await Place.findById(id);
-    res.render("places/edit.ejs", { place });
-}));
-//Update a certain Place
-app.put("/places/:id", validatePlace, catchAsync(async(req, res) => {
-    const { id } = req.params;
-    const editedPlace = await Place.findByIdAndUpdate(id, {...req.body.place})
-    await editedPlace.save();
-    res.redirect(`/places/${editedPlace._id}`);
-}));
-
-//Delete a certain Place
-app.delete("/places/:id", catchAsync(async(req, res) => {
-    const { id } = req.params;
-    await Place.findByIdAndDelete(id);
-    res.redirect("/places");
-}));
-
-//Post review
-app.post("/places/:id/reviews", catchAsync(async(req, res) => {
-    const place = await Place.findById(req.params.id);
-    const review = new Review(req.body.review);
-    place.reviews.push(review);
-    await review.save();
-    await place.save();
-    res.redirect(`/places/${place._id}`)
-}));
-
-//Delete review
-app.delete("/places/:id/reviews/:reviewId", catchAsync(async(req, res) => {
-    const { id, reviewId } = req.params
-    await Place.findByIdAndUpdate(id, { $pull:{ reviews: reviewId }})
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/places/${id}`);
-}));
 
 app.all("*", (req, res, next) =>{
     next(new ExpressError("We can't find the page", 404));
