@@ -36,6 +36,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, "public")));
 
+//session
+const session = require("express-session");
+const sessionConfig = {
+    secret: 'mysecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+};
+app.use(session(sessionConfig));
+
+//flash
+const flash = require("connect-flash");
+app.use(flash());
+app.use((req,res,next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+})
+
 
 //[Routings]
 const placeRoutes = require("./routes/places");

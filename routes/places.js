@@ -19,14 +19,18 @@ router.get("/new", (req, res) => {
 router.post("/", validatePlace, catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
+    req.flash("success", "New place is registered!");
     res.redirect("/places");
 }));
 
 //Show a certain Place
 router.get("/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
-    const place = await Place.findById(id)
-    .populate("reviews");
+    const place = await Place.findById(id).populate("reviews");
+    if (!place) {
+        req.flash("error", "We can't find the place");
+        return res.redirect("/places");
+    };
     res.render("places/show.ejs", { place });
 }));
 
@@ -35,6 +39,10 @@ router.get("/:id", catchAsync(async(req, res) => {
 router.get("/:id/edit", catchAsync(async(req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
+    if (!place) {
+        req.flash("error", "We can't find the place");
+        return res.redirect("/places");
+    };
     res.render("places/edit.ejs", { place });
 }));
 //Update a certain Place
@@ -42,6 +50,7 @@ router.put("/:id", validatePlace, catchAsync(async(req, res) => {
     const { id } = req.params;
     const editedPlace = await Place.findByIdAndUpdate(id, {...req.body.place})
     await editedPlace.save();
+    req.flash("success", "The place is edited!");
     res.redirect(`/places/${editedPlace._id}`);
 }));
 
@@ -49,6 +58,7 @@ router.put("/:id", validatePlace, catchAsync(async(req, res) => {
 router.delete("/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
+    req.flash("success", "The place is deleted!");
     res.redirect("/places");
 }));
 
