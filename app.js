@@ -24,6 +24,7 @@ app.set("view engine", "ejs");
 //Models
 const Place = require("./models/place");
 const Review = require("./models/review");
+const User = require("./models/user");
 
 //Errors
 const ExpressError = require("./utils/ExpressError");
@@ -58,13 +59,24 @@ app.use((req,res,next) => {
     next();
 })
 
+//passport 
+const passport = require("passport");
+const localStrategy = require("passport-local");
+
+app.use(passport.initialize()); 
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));  
+passport.serializeUser(User.serializeUser());  
+passport.deserializeUser(User.deserializeUser()); 
+
 
 //[Routings]
 const placeRoutes = require("./routes/places");
 const reviewRoutes = require("./routes/reviews")
+const userRoutes = require("./routes/users")
 app.use("/places", placeRoutes);
-app.use("/places/:id/reviews", reviewRoutes)
-
+app.use("/", userRoutes)
+app.use("/places", placeRoutes);
 
 //Home
 app.get("/", (req, res) => {
