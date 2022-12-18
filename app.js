@@ -53,11 +53,7 @@ app.use(session(sessionConfig));
 //flash
 const flash = require("connect-flash");
 app.use(flash());
-app.use((req,res,next) => {
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    next();
-})
+
 
 //passport 
 const passport = require("passport");
@@ -69,6 +65,13 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());  
 passport.deserializeUser(User.deserializeUser()); 
 
+app.use((req,res,next) => {
+    console.log(req.session);
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+})
 
 //[Routings]
 const placeRoutes = require("./routes/places");

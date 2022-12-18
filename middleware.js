@@ -10,3 +10,14 @@ module.exports.validatePlace = (req, res, next) =>{
         next();
     }
 }
+
+module.exports.isLoggedIn = (req, res, next) => { 
+    if(!req.isAuthenticated()){ 
+        req.session.returnTo = req.originalUrl;
+        req.flash("error", "Please Log in"); 
+        res.redirect("/login") 
+    } 
+    next(); 
+};
+
+module.exports.isAdmin

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utils/catchAsync");
-const { validatePlace } = require("../middleware");
+const { validatePlace, isLoggedIn } = require("../middleware");
 
 const Place = require("../models/place");
 
@@ -12,11 +12,11 @@ router.get("/", catchAsync(async(req, res) => {
 }));
 
 //New Place
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("places/new.ejs");
 });
 // Create Place
-router.post("/", validatePlace, catchAsync(async(req, res) => {
+router.post("/", isLoggedIn, validatePlace, catchAsync(async(req, res) => {
     const place = new Place(req.body.place);
     await place.save();
     req.flash("success", "New place is registered!");
@@ -36,7 +36,7 @@ router.get("/:id", catchAsync(async(req, res) => {
 
 
 //Edit a certain Place
-router.get("/:id/edit", catchAsync(async(req, res) => {
+router.get("/:id/edit", isLoggedIn, catchAsync(async(req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
     if (!place) {
@@ -46,7 +46,7 @@ router.get("/:id/edit", catchAsync(async(req, res) => {
     res.render("places/edit.ejs", { place });
 }));
 //Update a certain Place
-router.put("/:id", validatePlace, catchAsync(async(req, res) => {
+router.put("/:id", isLoggedIn, validatePlace, catchAsync(async(req, res) => {
     const { id } = req.params;
     const editedPlace = await Place.findByIdAndUpdate(id, {...req.body.place})
     await editedPlace.save();
@@ -55,7 +55,7 @@ router.put("/:id", validatePlace, catchAsync(async(req, res) => {
 }));
 
 //Delete a certain Place
-router.delete("/:id", catchAsync(async(req, res) => {
+router.delete("/:id", isLoggedIn, catchAsync(async(req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
     req.flash("success", "The place is deleted!");

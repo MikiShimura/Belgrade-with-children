@@ -4,9 +4,10 @@ const catchAsync = require("../utils/catchAsync");
 
 const Place = require("../models/place");
 const Review = require("../models/review");
+const { isLoggedIn } = require("../middleware");
 
 //Post review
-router.post("/", catchAsync(async(req, res) => {
+router.post("/", isLoggedIn, catchAsync(async(req, res) => {
     const place = await Place.findById(req.params.id);
     const review = new Review(req.body.review);
     place.reviews.push(review);
@@ -17,7 +18,7 @@ router.post("/", catchAsync(async(req, res) => {
 }));
 
 //Delete review
-router.delete("/:reviewId", catchAsync(async(req, res) => {
+router.delete("/:reviewId", isLoggedIn, catchAsync(async(req, res) => {
     const { id, reviewId } = req.params
     await Place.findByIdAndUpdate(id, { $pull:{ reviews: reviewId }})
     await Review.findByIdAndDelete(reviewId);
