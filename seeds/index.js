@@ -15,11 +15,12 @@ const seedDB = async () => {
     await Place.deleteMany({});
         const place = new Place({
             title: 'Pozorište lutaka "Pinokio"',
-            category: ["Culture"],
+            category: "Culture",
             ages: ["0~2", "3~6"],
             price: 500,
             description: "Fun puppet theater for small children",
             location: "Bulevar maršala Tolbuhina 1",
+            author: "639f115406339b155eaeda04",
             image: "https://images.unsplash.com/photo-1606733894347-7cb201dc810b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80"
         });
         await place.save();

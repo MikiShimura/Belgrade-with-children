@@ -19,12 +19,14 @@
               <li class="list-group-item text-muted"><%= place.location %></li>
               <li class="list-group-item text-muted"><%= place.price %>RSD</li>
           </ul>
-          <div class="card-body">
-              <a href="/places/<%= place._id %>/edit" class="card-link btn btn-info">Edit</a>
-              <form class="d-inline" action="/places/<%= place._id %>?_method=DELETE"  method="post">
-                  <button class="btn btn-danger">Delete</button>
-              </form>
-          </div>
+          <% if(currentUser && place.author._id.equals(currentUser._id)) { %>
+            <div class="card-body">
+                <a href="/places/<%= place._id %>/edit" class="card-link btn btn-info">Edit</a>
+                <form class="d-inline" action="/places/<%= place._id %>?_method=DELETE"  method="post">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+          <% } %> 
       </div>
   </div>
 

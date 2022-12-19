@@ -8,6 +8,10 @@ const placeSchema = new mongoose.Schema({
     price: String,
     description: String,
     location: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },   
     image: String,
     reviews: [
         {
