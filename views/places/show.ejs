@@ -31,6 +31,7 @@
   </div>
 
   <div class="col-6">
+    <% if(currentUser) { %>
       <h2>Add review</h2>
       <form action="/places/<%= place._id %>/reviews" method="post" class="mb-3 needs-validation" novalidate>
         <div>
@@ -57,7 +58,13 @@
         </div>
         <button class="btn btn-success">Post review</button>
       </form>
+      <% } %> 
 
+      <% if (place.reviews.length) { %> 
+      <h2>Reviews</h2>
+      <% } else { %>
+      <h2>No reviews</h2>
+      <% } %> 
       <% for (let review of place.reviews) { %> 
         <div class="card mb-3">
           <div class="card-body">
@@ -65,9 +72,12 @@
               Rated: <%= review.rating %> stars
             </p>
             <p class="card-text">Comment: <%= review.body %></p>
+            <p class="card-text">By: <%= review.author.username %></p>
+            <% if(currentUser && review.author.equals(currentUser._id)) { %>
             <form action="/places/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
               <button class="btn btn-sm btn-danger">Delete</button>
             </form>
+            <% } %> 
           </div>
         </div>
       <% } %>

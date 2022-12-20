@@ -78,7 +78,7 @@ const reviewRoutes = require("./routes/reviews")
 const userRoutes = require("./routes/users")
 app.use("/places", placeRoutes);
 app.use("/", userRoutes)
-app.use("/places", placeRoutes);
+app.use("/places/:id/reviews", reviewRoutes);
 
 //Home
 app.get("/", (req, res) => {

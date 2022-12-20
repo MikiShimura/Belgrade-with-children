@@ -4,12 +4,13 @@ const catchAsync = require("../utils/catchAsync");
 
 const Place = require("../models/place");
 const Review = require("../models/review");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, isReviewAuthor } = require("../middleware");
 
 //Post review
 router.post("/", isLoggedIn, catchAsync(async(req, res) => {
     const place = await Place.findById(req.params.id);
     const review = new Review(req.body.review);
+    review.author = req.user._id;
     place.reviews.push(review);
     await review.save();
     await place.save();
@@ -18,7 +19,7 @@ router.post("/", isLoggedIn, catchAsync(async(req, res) => {
 }));
 
 //Delete review
-router.delete("/:reviewId", isLoggedIn, catchAsync(async(req, res) => {
+router.delete("/:reviewId", isLoggedIn, isReviewAuthor, catchAsync(async(req, res) => {
     const { id, reviewId } = req.params
     await Place.findByIdAndUpdate(id, { $pull:{ reviews: reviewId }})
     await Review.findByIdAndDelete(reviewId);

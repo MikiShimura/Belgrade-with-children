@@ -27,7 +27,14 @@ router.post("/", isLoggedIn, validatePlace, catchAsync(async(req, res) => {
 //Show a certain Place
 router.get("/:id", catchAsync(async(req, res) => {
     const { id } = req.params;
-    const place = await Place.findById(id).populate('reviews').populate('author');
+    const place = await Place.findById(id)
+        .populate({
+            path:"reviews",
+            populate: {
+                path: "author"
+            } 
+        })
+        .populate("author");
     if (!place) {
         req.flash("error", "We can't find the place");
         return res.redirect("/places");
