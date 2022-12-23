@@ -5,9 +5,9 @@
   <div class="col-6">
       <div class="card mb-3">
           <div class="card-body">
-              <% if (place.image) { %> 
-              <img src="<%= place.image %>" class="d-block w-100" alt="...">
-              <% } %> 
+              <% for (let img of place.images) { %> 
+              <img src="<%= img.url %>" class="d-block w-100" alt="...">
+              <% } %>
               <h5 class="card-title"><%= place.title %></h5>
               <p class="card-text"><%= place.description %></p>
           </div>
