@@ -20,8 +20,22 @@ const seedDB = async () => {
             price: 500,
             description: "Fun puppet theater for small children",
             location: "Bulevar maršala Tolbuhina 1",
+            geometry: {
+                type: "Point",
+                longtitude: 20.418581936005843,
+                latitude: 44.831226923458956
+                // coordinates:[
+                //     20.418581936005843, 
+                //     44.831226923458956
+                // ]
+            },
             author: "639f115406339b155eaeda04",
-            image: "https://images.unsplash.com/photo-1606733894347-7cb201dc810b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80"
+            images: [
+                {
+                    url: "https://images.unsplash.com/photo-1606733894347-7cb201dc810b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80",
+                    filename: "1"
+                }
+            ]
         });
         await place.save();
     }

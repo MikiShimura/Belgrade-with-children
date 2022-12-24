@@ -16,6 +16,18 @@ const placeSchema = new mongoose.Schema({
     price: String,
     description: String,
     location: String,
+    geometry: {
+        type: {
+            type: String, 
+            enum: ['Point']
+        },
+        longtitude: Number,
+        latitude: Number
+        // coordinates: {
+        //     type: [Number],
+        //     required: true
+        // }
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"

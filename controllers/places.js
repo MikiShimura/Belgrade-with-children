@@ -1,5 +1,7 @@
 const Place = require("../models/place");
-const {cloudinary} = require("../cloudinary")
+const {cloudinary} = require("../cloudinary");
+
+const mapboxToken = process.env.MAPBOX_TOKEN;
 
 module.exports.index = async(req, res) => {
     const places = await Place.find({});
@@ -12,6 +14,7 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createPlace = async(req, res) => {
     const place = new Place(req.body.place);
+    place.geometry.type = "Point";
     place.author = req.user._id;
     place.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     await place.save();

@@ -6,6 +6,7 @@ module.exports.placeSchema = Joi.object({
         price: Joi.number().required().min(0),
         // image: Joi.string().required(),
         location: Joi.string().required(),
+        geometry: Joi.object().required(),
         description: Joi.string().required(),
         category: Joi.string(),
         ages: Joi.array(),
