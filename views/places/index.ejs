@@ -26,8 +26,12 @@
                                     <p class="card-text"><span class="badge rounded-pill bg-danger"><%= place.category %></span></p>
                                 <% }else if (place.category === "Nature") { %>
                                     <p class="card-text"><span class="badge rounded-pill bg-warning"><%= place.category %></span></p>
-                                <% } %> 
-                                <p class="card-text"><%= place.ages %></p>
+                                <% } %>
+                                <p class="card-text">
+                                    <% for (let age of place.ages) { %> 
+                                        <span class="badge bg-secondary"><%= age %></span>
+                                    <% } %>
+                                </p>
                                 <a href="places/<%= place._id %>">For detail</a>
                             </div>
                         </div>
