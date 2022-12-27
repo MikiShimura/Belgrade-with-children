@@ -10,8 +10,7 @@ const map = new mapboxgl.Map({
 map.on('style.load', () => {
     map.setFog({});
 });
-
-
+map.addControl(new mapboxgl.NavigationControl());
 
 for(let place of places) {
     let color = null;
