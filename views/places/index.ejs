@@ -49,3 +49,10 @@
 		</div>
 	</div>
 </div>
+
+<div id="index-map" style='width: 400px; height: 300px;' class="mb-3"></div>
+<script>
+    const mapToken = "<%= process.env.MAPBOX_TOKEN %>"
+    const places = <%- JSON.stringify(places) %>
+</script>
+<script src="/javascripts/indexMap.js"></script>
