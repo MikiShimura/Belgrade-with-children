@@ -15,6 +15,19 @@
                 <div class="p-4 mb-3 bg-light rounded">
                     <h4 class="fst-italic">About</h4>
                     <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+                    
+                    <form action="/places" method="GET">
+                        <input type="checkbox" id="culture" name="categories" value="Culture">
+                        <label for="culture">Culture</label><br>
+                        <input type="checkbox" id="sport" name="categories" value="Sport">
+                        <label for="sport">Sport</label><br>
+                        <input type="checkbox" id="education" name="categories" value="Education">
+                        <label for="education">Education</label><br>
+                        <input type="checkbox" id="nature" name="categories" value="Nature">
+                        <label for="nature">Nature</label><br>
+                        <button>Submit</button>
+                    </form>
+
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mapModal">
                         See with map
