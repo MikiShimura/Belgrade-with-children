@@ -4,24 +4,34 @@ const {cloudinary} = require("../cloudinary");
 const mapboxToken = process.env.MAPBOX_TOKEN;
 
 module.exports.index = async(req, res) => {
-    // console.log(req.query);
-    // const {category} = req.query
-    // console.log(category);
-    const {categories} = req.query
-    const result = Array.isArray(categories);
-    if (!categories) {
-        const places = await Place.find({});
-        res.render("places/index.ejs", { places })
-    } else if (!result) {
-        const places = await Place.find({category: categories});
-        res.render("places/index.ejs", { places })
-    } else {
+    const {categories, ages} = req.query;
+    if (categories && !ages) {
         const places = await Place.find({
             category: {
                 $in: categories
             }
         });
         res.render("places/index.ejs", { places })
+    }else if (!categories && ages) {
+        const places = await Place.find({
+            ages: {
+                $in: ages
+            }
+        });
+        res.render("places/index.ejs", { places })
+    }else if (categories && ages) {
+        const places = await Place.find({
+            category: {
+                $in: categories
+            },
+            ages: {
+                $in: ages
+            }
+        });
+        res.render("places/index.ejs", { places })
+    }else {
+        const places = await Place.find({});
+        res.render("places/index.ejs", { places })   
     }
 };
 
