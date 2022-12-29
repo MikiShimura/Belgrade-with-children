@@ -16,6 +16,7 @@ const placeSchema = new mongoose.Schema({
     price: String,
     description: String,
     location: String,
+    url: String,
     geometry: {
         type: {
             type: String, 

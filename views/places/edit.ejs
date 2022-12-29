@@ -48,28 +48,34 @@
             <div class="mb-3">
                 <p class="for-label">Ages</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages1" value="0~2" name="place[ages]" 
-                        <% if( place.ages.includes("0~2") ) { %>checked<% } %> 
+                    <input class="form-check-input" type="checkbox" id="Ages1" value="0~1" name="place[ages]" 
+                        <% if( place.ages.includes("0~1") ) { %>checked<% } %> 
                     >
-                    <label class="form-check-label" for="Ages1">0~2 years old</label>
+                    <label class="form-check-label" for="Ages1">0~1 yrs</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages2" value="3~6" name="place[ages]" 
-                        <% if( place.ages.includes("3~6") ) { %>checked<% } %>
+                    <input class="form-check-input" type="checkbox" id="Ages2" value="2~3" name="place[ages]" 
+                        <% if( place.ages.includes("2~3") ) { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="Ages2">3~6 years old</label>
+                    <label class="form-check-label" for="Ages2">2~3 yrs</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages3" value="7~10" name="place[ages]" 
-                        <% if( place.ages.includes("7~10") ) { %>checked<% } %>
+                    <input class="form-check-input" type="checkbox" id="Ages3" value="4~6" name="place[ages]" 
+                        <% if( place.ages.includes("4~6") ) { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="Ages3">7~10 years old</label>
+                    <label class="form-check-label" for="Ages3">4~6 yrs</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="Ages4" value="10~" name="place[ages]" 
+                    <input class="form-check-input" type="checkbox" id="Ages4" value="7~9" name="place[ages]" 
+                        <% if( place.ages.includes("7~9") ) { %>checked<% } %>
+                    >
+                    <label class="form-check-label" for="Ages4">7~9 yrs</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="Ages5" value="10~" name="place[ages]" 
                         <% if( place.ages.includes("10~") ) { %>checked<% } %>
                     >
-                    <label class="form-check-label" for="Ages4">10~ years old</label>
+                    <label class="form-check-label" for="Ages5">10~ yrs</label>
                 </div>
             </div>
             <div class="mb-3">
@@ -91,6 +97,12 @@
                 <input class="form-control" id="latitude" type="latitude" name="place[geometry][latitude]" value="<%= place.geometry.latitude %>" required>
                 <div class="invalid-feedback">
                     Please fill out the field.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="url">URL</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="url" aria-label="url" aria-describedby="url-label" name="place[url]" value="<%= place.url %>"> 
                 </div>
             </div>
             <div class="mb-3">

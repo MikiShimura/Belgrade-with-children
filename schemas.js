@@ -10,6 +10,7 @@ module.exports.placeSchema = Joi.object({
         description: Joi.string().required(),
         category: Joi.string(),
         ages: Joi.array(),
+        url: Joi.string()
     }).required(),
     deleteImages: Joi.array()
 });
