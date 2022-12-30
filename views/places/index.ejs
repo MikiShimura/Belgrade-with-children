@@ -1,5 +1,6 @@
 <% layout('layouts/boilerplate') -%>
 <link href="/stylesheets/top-img.css" rel="stylesheet">
+<link href="/stylesheets/btn.css" rel="stylesheet">
 
 <div class="p-5 mb-4 bg-img">
     <div class="container-fluid py-5">
@@ -11,11 +12,20 @@
 </div>
 <div class="container">
 	<div class="row">
+        <!-- less than sm -->
         <div class="d-block d-md-none">
-            <div class="p-4 mb-3 bg-light rounded">
-                <h4 class="fst-italic">sm</h4>
+            <div class="container p-4 mb-3 bg-light rounded">
+                <div class="row row-cols-2">
+                    <a data-bs-toggle="modal" data-bs-target="#mobileMapModal">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search
+                    </a>
+                    <a data-bs-toggle="modal" data-bs-target="#mobileMapModal">
+                        <i class="fa-solid fa-map-location-dot"></i> See with map
+                    </a>
+                </div>
             </div>
         </div>
+        <!-- more than sm -->
 		<div class="col-md-3 d-none d-md-block">    <!-- 3/12 -->
 			<div class="position-sticky" style="top: 2rem;">
                 <div class="p-4 mb-3 bg-light rounded">
@@ -91,21 +101,7 @@
 	</div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div id="index-map"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+<%- include("modals") %>
 
 <script>
     const mapToken = "<%= process.env.MAPBOX_TOKEN %>"

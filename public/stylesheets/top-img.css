@@ -1,7 +1,7 @@
 .bg-img {
     background-image: url("https://images.unsplash.com/photo-1453342664588-b702c83fc822?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=859&q=80");
     background-size: cover;
-    background-position: center;
+    background-position: center 20%;
     text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
 }
 
