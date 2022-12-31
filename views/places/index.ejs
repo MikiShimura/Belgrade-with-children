@@ -1,13 +1,10 @@
 <% layout('layouts/boilerplate') -%>
 <link href="/stylesheets/top-img.css" rel="stylesheet">
-<link href="/stylesheets/btn.css" rel="stylesheet">
 
 <div class="p-5 mb-4 bg-img">
     <div class="container-fluid py-5">
       <h1 class="display-5 fw-bold text-light">Explore Belgrade with small adventurers</h1>
-      <p class="col-md-8 fs-4 text-light">You can't decide where to take kids this weekend?<br>
-        Find wonderful destination and share the info with other parents.
-      </p>
+      <p class="col-md-8 fs-4 text-light">Find wonderful destination for this weekend and share the info with other parents.</p>
     </div>
 </div>
 <div class="container">
@@ -16,10 +13,12 @@
         <div class="d-block d-md-none">
             <div class="container p-4 mb-3 bg-light rounded">
                 <div class="row row-cols-2">
-                    <a data-bs-toggle="modal" data-bs-target="#mobileMapModal">
+                    <!-- Button trigger modal -->
+                    <a data-bs-toggle="modal" data-bs-target="#searchModal">
                         <i class="fa-solid fa-magnifying-glass"></i> Search
                     </a>
-                    <a data-bs-toggle="modal" data-bs-target="#mobileMapModal">
+                    <!-- Button trigger modal -->
+                    <a data-bs-toggle="modal" data-bs-target="#mapModal">
                         <i class="fa-solid fa-map-location-dot"></i> See with map
                     </a>
                 </div>
@@ -30,35 +29,7 @@
 			<div class="position-sticky" style="top: 2rem;">
                 <div class="p-4 mb-3 bg-light rounded">
                     <h4 class="fst-italic">Search</h4>
-                    <form class="d-inline" action="/places" method="GET">
-                        <p class="fw-bold mb-0 mt-1">Category:</p>
-                        <input class="form-check-input" type="checkbox" id="culture" name="categories" value="Culture">
-                        <label class="form-check-label" for="culture">Culture</label><br>
-                        <input class="form-check-input" type="checkbox" id="sport" name="categories" value="Sport">
-                        <label class="form-check-label" for="sport">Sport</label><br>
-                        <input class="form-check-input" type="checkbox" id="education" name="categories" value="Education">
-                        <label class="form-check-label" for="education">Education</label><br>
-                        <input class="form-check-input" type="checkbox" id="nature" name="categories" value="Nature">
-                        <label class="form-check-label" for="nature">Nature</label><br>
-
-                        <p class="fw-bold mb-0 mt-1">Age:</p>
-                        <input class="form-check-input" type="checkbox" id="0~1" name="ages" value="0~1">
-                        <label class="form-check-label" for="0~1">0~1 yrs</label><br>
-                        <input class="form-check-input" type="checkbox" id="2~3" name="ages" value="2~3">
-                        <label class="form-check-label" for="2~3">2~3 yrs</label><br>
-                        <input class="form-check-input" type="checkbox" id="4~6" name="ages" value="4~6">
-                        <label class="form-check-label" for="4~6">4~6 yrs</label><br>
-                        <input class="form-check-input" type="checkbox" id="7~9" name="ages" value="7~9">
-                        <label class="form-check-label" for="7~9">7~9 yrs</label><br>
-                        <input class="form-check-input" type="checkbox" id="10~" name="ages" value="10~">
-                        <label class="form-check-label mb-2" for="10~">10~ yrs</label><br>
-                        
-                        <button class="btn btn-danger mb-2">Search</button>
-                    </form>
-                    <form class="d-inline" action="/places" method="GET">
-                        <button class="btn btn-outline-danger mb-2">Clear all</button>
-                    </form>
-
+                    <%- include("search") %>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mapModal">
                         See with map

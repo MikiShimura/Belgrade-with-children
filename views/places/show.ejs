@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="col-md-5">
-      <ul class="list-group list-group-flush"> 
+      <!-- <ul class="list-group list-group-flush"> 
         <li class="list-group-item"><%= place.category %></li>
         <li class="list-group-item">Ages 
             <% for (let age of place.ages) { %>
@@ -37,7 +37,15 @@
         <li class="list-group-item text-muted"><%= place.location %></li>
         <li class="list-group-item text-muted"><%= place.price %>RSD</li>
         <li class="list-group-item text-muted"><%= place.url %></li>
-      </ul>
+      </ul> -->
+        <p>Category: <%= place.category %></p>
+        <p>Ages: 
+            <% for (let age of place.ages) { %>
+                <%= age %>
+            <% } %> 
+        </li>
+        <p>Price: <%= place.price %>RSD/per child</p>
+        <p>Website: <a href="<%= place.url %>"><%= place.url %></a></p>
       <div>
         <div id='map'></div>
       </div>
