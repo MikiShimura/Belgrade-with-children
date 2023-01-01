@@ -25,6 +25,10 @@ const ejsMate = require('ejs-mate');
 app.engine("ejs", ejsMate); 
 app.set("view engine", "ejs");
 
+//Sanitize
+const mongoSanitize = require('express-mongo-sanitize');
+app.use(mongoSanitize());
+
 //Models
 const Place = require("./models/place");
 const Review = require("./models/review");
@@ -35,31 +39,33 @@ const ExpressError = require("./utils/ExpressError");
 const catchAsync = require("./utils/catchAsync");
 const { validatePlace } = require("./middleware");
 
-//
+//Parse
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, "public")));
 
-//session
+//Session
 const session = require("express-session");
 const sessionConfig = {
     secret: 'mysecret',
     resave: false,
     saveUninitialized: true,
     cookie: {
+        name: "session",
         httpOnly: true,
+        secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 };
 app.use(session(sessionConfig));
 
-//flash
+//Flash
 const flash = require("connect-flash");
 app.use(flash());
 
 
-//passport 
+//Passport 
 const passport = require("passport");
 const localStrategy = require("passport-local");
 
@@ -74,7 +80,11 @@ app.use((req,res,next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
-})
+});
+
+//Helmet
+const helmet = require("helmet");
+app.use(helmet());
 
 //[Routings]
 const placeRoutes = require("./routes/places");
