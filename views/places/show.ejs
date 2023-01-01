@@ -27,21 +27,20 @@
       </div>
     </div>
     <div class="col-md-5">
-      <!-- <ul class="list-group list-group-flush"> 
-        <li class="list-group-item"><%= place.category %></li>
-        <li class="list-group-item">Ages 
-            <% for (let age of place.ages) { %>
-                <%= age %>
-            <% } %> 
-        </li>
-        <li class="list-group-item text-muted"><%= place.location %></li>
-        <li class="list-group-item text-muted"><%= place.price %>RSD</li>
-        <li class="list-group-item text-muted"><%= place.url %></li>
-      </ul> -->
-        <p>Category: <%= place.category %></p>
+        <p>Category: 
+      <% if(place.category === "Culture") { %> 
+          <span class="badge rounded-pill bg-primary">
+      <% }else if (place.category === "Sport") { %>
+          <span class="badge rounded-pill bg-success">
+      <% }else if (place.category === "Education") { %>
+          <span class="badge rounded-pill bg-danger">
+      <% }else if (place.category === "Nature") { %>
+          <span class="badge rounded-pill bg-warning">
+      <% } %>
+        <%= place.category %></span></p>
         <p>Ages: 
             <% for (let age of place.ages) { %>
-                <%= age %>
+              <span class="badge bg-secondary"><%= age %></span>
             <% } %> 
         </li>
         <p>Price: <%= place.price %>RSD/per child</p>

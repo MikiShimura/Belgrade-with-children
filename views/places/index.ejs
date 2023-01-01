@@ -47,15 +47,17 @@
                             <img src="<%= place.images[0].url %>" class="card-img-top" style="height:15vw; object-fit:cover;" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title text-body"><%= place.title %></h5>
+                                <p class="card-text">
                                 <% if(place.category === "Culture") { %> 
-                                    <p class="card-text"><span class="badge rounded-pill bg-primary"><%= place.category %></span></p>
+                                    <span class="badge rounded-pill bg-primary">
                                 <% }else if (place.category === "Sport") { %>
-                                    <p class="card-text"><span class="badge rounded-pill bg-success"><%= place.category %></span></p>
+                                    <span class="badge rounded-pill bg-success">
                                 <% }else if (place.category === "Education") { %>
-                                    <p class="card-text"><span class="badge rounded-pill bg-danger"><%= place.category %></span></p>
+                                    <span class="badge rounded-pill bg-danger">
                                 <% }else if (place.category === "Nature") { %>
-                                    <p class="card-text"><span class="badge rounded-pill bg-warning"><%= place.category %></span></p>
+                                    <span class="badge rounded-pill bg-warning">
                                 <% } %>
+                                <%= place.category %></span></p>
                                 <p class="card-text">
                                     <% for (let age of place.ages) { %> 
                                         <span class="badge bg-secondary"><%= age %></span>
