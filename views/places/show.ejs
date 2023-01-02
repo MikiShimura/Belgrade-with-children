@@ -53,8 +53,8 @@
   </div>
   <% if(currentUser && place.author._id.equals(currentUser._id)) { %>
     <div class="mb-3">
-        <a href="/places/<%= place._id %>/edit" class="btn btn-info">Edit</a>
-        <form class="d-inline" action="/places/<%= place._id %>?_method=DELETE"  method="post">
+        <a href="/<%= place._id %>/edit" class="btn btn-info">Edit</a>
+        <form class="d-inline" action="/<%= place._id %>?_method=DELETE"  method="post">
             <button class="btn btn-danger">Delete</button>
         </form>
     </div>
@@ -88,7 +88,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form action="/places/<%= place._id %>/reviews" method="post" class="mb-3 needs-validation" novalidate>
+                <form action="/<%= place._id %>/reviews" method="post" class="mb-3 needs-validation" novalidate>
                   <div>
                     <fieldset class="starability-basic">
                       <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -133,7 +133,7 @@
         <p class="card-text">Comment: <%= review.body %></p>
         <p class="card-text">By: <%= review.author.username %></p>
         <% if(currentUser && review.author.equals(currentUser._id)) { %>
-        <form action="/places/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+        <form action="/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
           <button class="btn btn-sm btn-danger">Delete</button>
         </form>
         <% } %> 

@@ -12,7 +12,7 @@ const secret = process.env.SECRET || 'mysecret';
 const port = process.env.PORT || 3000;
 
 const mongoose = require("mongoose");
-mongoose.connect(dbUrl, 
+mongoose.connect("mongodb://localhost:27017/Belgrade-with-children", 
 {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log("MongoDB connected!");
@@ -21,6 +21,7 @@ mongoose.connect(dbUrl,
         console.log("MongoDB connection error:");
         console.log(err);
     })
+mongoose.set('strictQuery', false);
 
 const path = require("path");
 app.set("views", path.join(__dirname, "views"));
@@ -148,15 +149,9 @@ app.use(helmet({
 const placeRoutes = require("./routes/places");
 const reviewRoutes = require("./routes/reviews")
 const userRoutes = require("./routes/users")
-app.use("/places", placeRoutes);
-app.use("/", userRoutes)
-app.use("/places/:id/reviews", reviewRoutes);
-
-//Home
-app.get("/", (req, res) => {
-    res.send("home");
-    // res.render("home")
-});
+app.use("/", placeRoutes);
+app.use("/user", userRoutes)
+app.use("/:id/reviews", reviewRoutes);
 
 app.all("*", (req, res, next) =>{
     next(new ExpressError("We can't find the page", 404));

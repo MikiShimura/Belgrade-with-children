@@ -17,7 +17,7 @@ module.exports.isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()){ 
         req.session.returnTo = req.originalUrl;
         req.flash("error", "Please Log in"); 
-        res.redirect("/login") 
+        res.redirect("/") 
     } 
     next(); 
 };
@@ -29,7 +29,7 @@ module.exports.isAuthor = async(req, res, next) => {
         return next();
     }else if(!place.author.equals(req.user._id)) { 
         req.flash("error", "You don't have right for the action")
-        return res.redirect(`/places/${id}`);
+        return res.redirect(`/${id}`);
     }
     next();
 }
@@ -41,7 +41,7 @@ module.exports.isReviewAuthor = async(req, res, next) => {
         return next();
     }else if(!review.author._id.equals(req.user._id)) { 
         req.flash("error", "You don't have right for the action")
-        return res.redirect(`/places/${id}`);
+        return res.redirect(`/${id}`);
     }
     next();
 }

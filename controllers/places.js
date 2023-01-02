@@ -46,7 +46,7 @@ module.exports.createPlace = async(req, res) => {
     place.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     await place.save();
     req.flash("success", "New place is registered!");
-    res.redirect("/places");
+    res.redirect("/");
 };
 
 module.exports.showPlace = async(req, res) => {
@@ -61,7 +61,7 @@ module.exports.showPlace = async(req, res) => {
         .populate("author");
     if (!place) {
         req.flash("error", "We can't find the place");
-        return res.redirect("/places");
+        return res.redirect("/");
     };
     res.render("places/show.ejs", { place });
 };
@@ -71,7 +71,7 @@ module.exports.renderEditForm = async(req, res) => {
     const place = await Place.findById(id);
     if (!place) {
         req.flash("error", "We can't find the place");
-        return res.redirect("/places");
+        return res.redirect("/");
     };
     res.render("places/edit.ejs", { place });
 };
@@ -89,12 +89,12 @@ module.exports.updatePlace = async(req, res) => {
         await place.updateOne({ $pull: {images: {filename: { $in: req.body.deleteImages}}}}) 
     };
     req.flash("success", "The place is edited!");
-    res.redirect(`/places/${place._id}`);
+    res.redirect(`/${place._id}`);
 };
 
 module.exports.deletePlace = async(req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
     req.flash("success", "The place is deleted!");
-    res.redirect("/places");
+    res.redirect("/");
 };
