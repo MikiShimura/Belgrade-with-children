@@ -1,5 +1,5 @@
 const Place = require("../models/place");
-const {cloudinary} = require("../cloudinary");
+const {cloudinary} = require("../cloudinary")
 
 const mapboxToken = process.env.MAPBOX_TOKEN;
 

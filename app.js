@@ -101,7 +101,48 @@ app.use((req,res,next) => {
 
 //Helmet
 const helmet = require("helmet");
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false,
+}));
+
+// const scriptSrcUrls = [
+//     'https://api.mapbox.com',
+//     'https://cdn.jsdelivr.net',
+//     'https://ka-f.fontawesome.com',
+//     "https://kit.fontawesome.com",
+// ];
+// const styleSrcUrls = [
+//     'https://api.mapbox.com',
+//     'https://cdn.jsdelivr.net',
+//     'https://ka-f.fontawesome.com',
+//     "https://kit.fontawesome.com",
+// ];
+// const connectSrcUrls = [
+//     'https://api.mapbox.com',
+//     'https://*.tiles.mapbox.com',
+//     'https://events.mapbox.com',
+//     'https://ka-f.fontawesome.com',
+//     "https://kit.fontawesome.com",
+// ];
+// const fontSrcUrls = [];
+// const imgSrcUrls = [
+//     `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
+//     'https://images.unsplash.com'
+// ];
+
+// app.use(helmet.contentSecurityPolicy({
+//     directives: {
+//         defaultSrc: ['https://ka-f.fontawesome.com'],
+//         connectSrc: ["'self'", ...connectSrcUrls],
+//         scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+//         styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+//         workerSrc: ["'self'", "blob:"],
+//         childSrc: ["blob:"],
+//         objectSrc: [],
+//         imgSrc: ["'self'", 'blob:', 'data:', ...imgSrcUrls],
+//         fontSrc: ["'self'", ...fontSrcUrls]
+//     }
+// }));
 
 //[Routings]
 const placeRoutes = require("./routes/places");

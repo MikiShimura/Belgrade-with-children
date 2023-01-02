@@ -6,7 +6,7 @@ const { validatePlace, isLoggedIn, isAuthor } = require("../middleware");
 
 const Place = require("../models/place");
 
-const {cloudinary,storage} = require("../cloudinary");
+const {storage} = require("../cloudinary")
 const multer  = require('multer');
 const upload = multer({ storage });
 
