@@ -28,7 +28,7 @@ for(let place of places) {
     .setPopup(
         new mapboxgl
         .Popup({ offset: 25 })
-        .setHTML(`<a href="/places/${place._id}">${place.title}</a><p>${place.location}</p>`)
+        .setHTML(`<a href="/${place._id}">${place.title}</a><p>${place.location}</p>`)
     )
     .addTo(map);
 }
