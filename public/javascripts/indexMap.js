@@ -18,6 +18,8 @@ for(let place of places) {
         color = { "color": "#0d6efd" } 
     }else if(place.category === "Sport") { 
         color = { "color": "#198754" }
+    }else if(place.category === "Entertainment") { 
+        color = { "color": "#0dcaf0" }
     }else if(place.category === "Education") { 
         color = { "color": "#dc3545" }
     }else if(place.category === "Nature") { 
