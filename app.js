@@ -101,10 +101,10 @@ app.use((req,res,next) => {
 });
 
 //Helmet
-const helmet = require("helmet");
-app.use(helmet({
-    contentSecurityPolicy: false,
-}));
+// const helmet = require("helmet");
+// app.use(helmet({
+//     contentSecurityPolicy: false,
+// }));
 
 // const scriptSrcUrls = [
 //     'https://api.mapbox.com',
