@@ -1,28 +1,47 @@
 <form class="d-inline" action="/" method="GET">
     <p class="fw-bold mb-0 mt-1">Category:</p>
-    <input class="form-check-input" type="checkbox" id="culture" name="categories" value="Culture">
+    <input class="form-check-input" type="checkbox" id="culture" name="categories" value="Culture"
+        <% if(categories && categories.includes("Culture")) { %>checked<% } %> 
+    >
     <label class="form-check-label" for="culture">Culture</label><br>
-    <input class="form-check-input" type="checkbox" id="sport" name="categories" value="Sport">
+    <input class="form-check-input" type="checkbox" id="sport" name="categories" value="Sport"
+        <% if(categories && categories.includes("Sport")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="sport">Sport</label><br>
-    <input class="form-check-input" type="checkbox" id="education" name="categories" value="Education">
+    <input class="form-check-input" type="checkbox" id="education" name="categories" value="Education"
+        <% if(categories && categories.includes("Education")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="education">Education</label><br>
-    <input class="form-check-input" type="checkbox" id="nature" name="categories" value="Nature">
+    <input class="form-check-input" type="checkbox" id="nature" name="categories" value="Nature"
+        <% if(categories && categories.includes("Nature")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="nature">Nature</label><br>
 
     <p class="fw-bold mb-0 mt-1">Age:</p>
-    <input class="form-check-input" type="checkbox" id="0~1" name="ages" value="0~1">
+    <input class="form-check-input" type="checkbox" id="0~1" name="ages" value="0~1"
+        <% if(ages && ages.includes("0~1")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="0~1">0~1 yrs</label><br>
-    <input class="form-check-input" type="checkbox" id="2~3" name="ages" value="2~3">
+    <input class="form-check-input" type="checkbox" id="2~3" name="ages" value="2~3"
+        <% if(ages && ages.includes("2~3")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="2~3">2~3 yrs</label><br>
-    <input class="form-check-input" type="checkbox" id="4~6" name="ages" value="4~6">
+    <input class="form-check-input" type="checkbox" id="4~6" name="ages" value="4~6"
+        <% if(ages && ages.includes("4~6")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="4~6">4~6 yrs</label><br>
-    <input class="form-check-input" type="checkbox" id="7~9" name="ages" value="7~9">
+    <input class="form-check-input" type="checkbox" id="7~9" name="ages" value="7~9"
+        <% if(ages && ages.includes("7~9")) { %>checked<% } %>
+    >
     <label class="form-check-label" for="7~9">7~9 yrs</label><br>
-    <input class="form-check-input" type="checkbox" id="10~" name="ages" value="10~">
+    <input class="form-check-input" type="checkbox" id="10~" name="ages" value="10~"
+        <% if(ages && ages.includes("10~")) { %>checked<% } %>
+    >
     <label class="form-check-label mb-2" for="10~">10~ yrs</label><br>
     
     <button class="btn btn-danger mb-2">Search</button>
 </form>
+
 <form class="d-inline" action="/" method="GET">
     <button class="btn btn-outline-danger mb-2">Clear all</button>
 </form>

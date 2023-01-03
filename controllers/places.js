@@ -11,14 +11,14 @@ module.exports.index = async(req, res) => {
                 $in: categories
             }
         });
-        res.render("places/index.ejs", { places })
+        res.render("places/index.ejs", { places, categories, ages })
     }else if (!categories && ages) {
         const places = await Place.find({
             ages: {
                 $in: ages
             }
         });
-        res.render("places/index.ejs", { places })
+        res.render("places/index.ejs", { places, categories, ages })
     }else if (categories && ages) {
         const places = await Place.find({
             category: {
@@ -28,10 +28,10 @@ module.exports.index = async(req, res) => {
                 $in: ages
             }
         });
-        res.render("places/index.ejs", { places })
+        res.render("places/index.ejs", { places, categories, ages })
     }else {
         const places = await Place.find({});
-        res.render("places/index.ejs", { places })   
+        res.render("places/index.ejs", { places, categories, ages })   
     }
 };
 
