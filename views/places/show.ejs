@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') -%>
 <link rel="stylesheet" type="text/css" href="/stylesheets/starability-basic.css"/>
 
-<div class="container mb-3">
+<div class="container col-10 mb-3">
 	<div class="row">
     <h2><%= place.title %></h5>
     <p class="mb-1"><%= place.location %></p>
@@ -63,7 +63,7 @@
   <% } %>
 </div>
 
-<div class="container mb-3">
+<div class="container col-10  mb-3">
   <div class="row">
     <div class="col">
     <% if (place.reviews.length) { %> 
@@ -125,7 +125,7 @@
   </div>
 </div>
 
-<div class="container mb-3">
+<div class="container col-10 mb-3">
   <% for (let review of place.reviews) { %>
     <div class="card mb-1">
       <div class="card-body">
